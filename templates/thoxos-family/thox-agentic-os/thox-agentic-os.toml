@@ -1,0 +1,29 @@
+# thox-agentic-os.toml
+#
+# Special config for the ThoxAgenticOS family.
+# Supports two distinct build targets:
+#   1. agent-runtime  → OCI image of the Rust microkernel userspace
+#   2. thoxos-air-shim → The embedded Linux side (ThoxOS Air)
+
+[[build]]
+name = "agent-runtime"
+profile = "custom"                  # ThoxAOS does not use a classic Linux kernel
+type = "rust-microkernel-userspace"
+
+[[build]]
+name = "thoxos-air-shim"
+profile = "air"
+type = "embedded-linux"
+
+[project]
+name = "thox-agentic-os"
+version = "0.4.0"
+description = "Flagship agent-native OS + ThoxOS Air embedded shim"
+
+[kernel]
+# For the air-shim build only
+profile = "air"
+
+[output]
+formats = ["oci", "raw"]
+default_format = "oci"

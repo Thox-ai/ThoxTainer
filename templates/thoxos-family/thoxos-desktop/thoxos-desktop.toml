@@ -1,0 +1,29 @@
+# thoxos-desktop.toml
+
+[project]
+name = "thoxos-desktop"
+version = "0.1.0"
+description = "Full desktop / workstation ThoxOS experience"
+
+[kernel]
+profile = "desktop"                 # Future richer profile
+arch = "aarch64"
+
+[base]
+strategy = "alpine"
+image = "alpine:3.21"
+
+[features]
+- "desktop-environment"
+- "windowd"
+- "full-mesh"
+- "agent-teams"
+- "hardware-accel"
+
+[runtime]
+entrypoint = ["/usr/local/bin/thox-desktop-entrypoint"]
+user = "desktop"
+
+[output]
+formats = ["oci", "raw", "qcow2"]
+default_format = "oci"

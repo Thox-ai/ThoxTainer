@@ -1,0 +1,27 @@
+# thoxos-mini-portable.toml
+
+[project]
+name = "thoxos-mini-portable"
+version = "0.1.0"
+description = "ThoxOS for portable / handheld field devices"
+
+[kernel]
+profile = "edge"                    # Real-time + sensor I/O friendly
+arch = "aarch64"
+
+[base]
+strategy = "alpine"
+image = "alpine:3.21"
+
+[features]
+- "sensor-hub"
+- "real-time"
+- "portable-power-management"
+- "mesh"
+
+[runtime]
+entrypoint = ["/usr/local/bin/thox-portable-entrypoint"]
+user = "portable"
+
+[output]
+formats = ["oci", "raw", "img"]

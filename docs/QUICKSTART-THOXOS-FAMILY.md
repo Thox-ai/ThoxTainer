@@ -142,43 +142,86 @@ thox run \
 
 ---
 
-### 4.4 thox-agentic-os (ThoxAOS) — Special Case
+### 4.4 thox-agentic-os (ThoxAOS) — Packaging as OCI Images (Recommended Path)
 
-This is the **flagship bare-metal Rust microkernel** project.
+This is the **flagship bare-metal Rust microkernel** project:  
+https://github.com/ttracx/thox-agentic-os
 
-See: https://github.com/ttracx/thox-agentic-os
+ThoxAgenticOS (ThoxAOS) is special because it is **not** a traditional Linux distribution. It is a Rust microkernel where AI agents are first-class primitives.
 
-It already has an explicit relationship with ThoxOS:
+However, ThoxTainer is still extremely valuable for it in two ways:
 
-- **ThoxOS Air** is documented as the embedded Linux path for ThoxMini-class edge devices.
-- The Rust microkernel (ThoxAOS) is the "full agent-native OS".
-- ThoxMigrate™ shim provides classic ThoxOS compatibility.
+1. **Packaging the agent runtime + userspace as OCI images**
+2. **Building the ThoxOS Air embedded Linux shim** that meshes with full ThoxAOS nodes (see `docs/thoxos-air.md` in the agentic-os repo).
 
-**How ThoxTainer fits today**:
+#### Recommended Approach: Split Packaging
 
-1. **Development host + test runner**
-   - Use ThoxTainer VMs to run QEMU/HVF instances of ThoxAOS during development.
-   - Package the agent runtime (thoxa, meshstack, nullclaw, etc.) as OCI images.
+We maintain two images:
 
-2. **ThoxOS Air shim builder**
-   - Use ThoxTainer + custom `ThoxOS Air` kernel to build the embedded Linux side that meshes with full ThoxAOS nodes.
+- `thox-agentic-os:agent-runtime` — The Rust supervisor (`thoxd`), shell, agent teams, MeshStack, NullClaw, etc.
+- `thox-agentic-os:thoxos-air-shim` — The Linux side for sensor hubs and hardware relays.
 
-**Example current workflow**:
+#### Step-by-Step: Packaging the Rust Microkernel Runtime
 
-```bash
-# In Thox-agentic-os repo
-./scripts/build.sh --release
+We have provided ready-to-use starter templates here:
 
-# Run the QEMU image inside a ThoxTainer-managed environment (future)
-thox run \
-  --kernel ../ThoxContainerization/kernel/build/ThoxOS-Air/vmlinux \
-  --memory 2G \
-  ghcr.io/ttracx/thox-agentic-os:latest
+```
+templates/thoxos-family/thox-agentic-os/
+├── Dockerfile.agent-runtime
+├── Dockerfile.thoxos-air-shim
+└── thox-agentic-os.toml
 ```
 
-**Long-term vision**:
-- `thox os build --project thox-agentic-os --variant air` produces the Linux shim image.
-- `thox os build --project thox-agentic-os --variant native` produces artifacts consumable by the Rust microkernel build.
+**Current recommended workflow (2026-05):**
+
+```bash
+# 1. Clone the flagship project
+git clone https://github.com/ttracx/thox-agentic-os.git
+cd thox-agentic-os
+
+# 2. Build the Rust components (release)
+./scripts/build.sh --release
+
+# 3. Copy the new templates into the project (or reference them)
+cp -r /Volumes/VibeStore/ThoxTainer/templates/thoxos-family/thox-agentic-os/* .
+
+# 4. Build the agent runtime as an OCI image
+docker build \
+  -f Dockerfile.agent-runtime \
+  -t ghcr.io/ttracx/thox-agentic-os:agent-runtime \
+  .
+
+# 5. (Optional) Also build the ThoxOS Air shim
+docker build \
+  -f Dockerfile.thoxos-air-shim \
+  -t ghcr.io/ttracx/thox-agentic-os:thoxos-air-shim \
+  .
+
+# 6. Run the agent runtime inside a powerful ThoxTainer VM on Apple Silicon
+thox run \
+  --kernel ../ThoxContainerization/kernel/build/ThoxOS-Air/vmlinux \
+  --memory 4G --cpus 4 \
+  --name thoxaos-dev \
+  ghcr.io/ttracx/thox-agentic-os:agent-runtime
+```
+
+This gives you a full ThoxAOS userspace environment running inside a clean, isolated, fast-booting lightweight VM managed by ThoxTainer — perfect for development and testing without polluting your host.
+
+#### Long-term Vision (once `thox os` tooling lands)
+
+```bash
+# Build both variants with one command
+thox os build --project thox-agentic-os --variant agent-runtime
+thox os build --project thox-agentic-os --variant thoxos-air-shim --profile air
+
+# Run them
+thox os run thox-agentic-os --variant agent-runtime
+thox os run thox-agentic-os --variant thoxos-air-shim --mesh-with main-node
+```
+
+See the template `thox-agentic-os.toml` for the proposed declarative configuration.
+
+This split model (heavy Rust microkernel + lightweight Linux shims) is one of the most powerful patterns in the entire ThoxOS family, and ThoxTainer is the ideal tool for developing and testing it on Apple Silicon.
 
 ---
 

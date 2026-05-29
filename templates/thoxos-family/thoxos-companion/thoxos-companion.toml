@@ -1,0 +1,33 @@
+# thoxos-companion.toml
+#
+# Config for thoxos-companion (wearables / secondary devices).
+
+[project]
+name = "thoxos-companion"
+version = "0.1.0"
+description = "ThoxOS for wearables, earbuds, and companion modules"
+
+[kernel]
+profile = "air"                     # or "companion" once created
+arch = "aarch64"
+
+[base]
+strategy = "alpine"
+image = "alpine:3.21"
+
+[features]
+- "ultra-low-power"
+- "mesh-client-only"
+- "sensor-fusion"
+- "no-network-by-default"
+
+[runtime]
+entrypoint = ["/usr/local/bin/thox-companion-entrypoint"]
+user = "companion"
+
+[signing]
+required = true
+
+[output]
+formats = ["oci", "raw"]
+default_format = "oci"

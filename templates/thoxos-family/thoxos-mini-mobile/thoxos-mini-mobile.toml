@@ -1,0 +1,43 @@
+# thoxos-mini-mobile.toml
+#
+# Declarative config for future `thox os build` command.
+# This format is experimental and will evolve.
+
+[project]
+name = "thoxos-mini-mobile"
+version = "0.1.0"
+description = "Ultra-compact ThoxOS for mobile and phone-class devices"
+
+[kernel]
+profile = "mini"                    # or "mini-mobile" once custom profiles exist
+arch = "aarch64"
+
+[base]
+strategy = "alpine"                 # or "thoxos-minimal-rootfs"
+image = "alpine:3.21"
+
+[features]
+- "mobile-connectivity"             # Wi-Fi, Bluetooth, cellular
+- "sensor-hub"
+- "low-power"
+- "mesh-client"
+
+[packages]
+system = [
+    "ca-certificates",
+    "dbus",
+    "bluez",
+    "wpa_supplicant"
+]
+
+[runtime]
+entrypoint = ["/usr/local/bin/thox-mobile-entrypoint"]
+user = "thox"
+
+[signing]
+required = true
+policy = "thox-release"
+
+[output]
+formats = ["oci", "raw"]            # OCI for dev, raw for flashing devices
+default_format = "oci"

@@ -1,0 +1,31 @@
+# Dockerfile.thoxos-air-shim
+#
+# Builds the embedded Linux side (ThoxOS Air) that acts as a sensor hub
+# and hardware relay that meshes back into full ThoxAgenticOS nodes.
+#
+# This is the "Linux shim" referenced in thox-agentic-os/docs/thoxos-air.md
+
+FROM alpine:3.21 AS base
+
+RUN apk add --no-cache \
+    ca-certificates \
+    dbus \
+    i2c-tools \
+    spi-tools \
+    can-utils \
+    wireless-tools \
+    && rm -rf /var/cache/apk/*
+
+RUN adduser -D -u 1000 thoxair
+
+# Copy the ThoxOS Air specific agent runtime + mesh client
+# COPY --from=builder /out/thox-air-shim /usr/local/bin/
+
+COPY entrypoint.sh /usr/local/bin/thox-air-shim
+RUN chmod +x /usr/local/bin/thox-air-shim
+
+USER thoxair
+WORKDIR /home/thoxair
+
+ENTRYPOINT ["/usr/local/bin/thox-air-shim"]
+CMD ["--role", "sensor-hub"]
