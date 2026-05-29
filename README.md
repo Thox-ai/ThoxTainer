@@ -71,6 +71,21 @@ See the kernel customization guide in `ThoxContainerization/kernel/README.md`.
 - [Build from source](./BUILDING.md).
 - Explore ThoxOS kernel work in the sibling [ThoxContainerization](../ThoxContainerization) repo.
 
+## Documentation
+
+| Document                    | Purpose                                                                 |
+|-----------------------------|-------------------------------------------------------------------------|
+| [FORK.md](./docs/FORK.md)   | Fork philosophy, what changed, contribution policy vs upstream Apple   |
+| [GETTING_STARTED.md](./docs/GETTING_STARTED.md) | Step-by-step guide from zero to first custom kernel                |
+| [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | Deep technical overview of the VM model + ThoxOS layers           |
+| [KERNEL_GUIDE.md](./docs/KERNEL_GUIDE.md) | **Most important** — how to create ThoxOS Mini / Air / Custom kernels |
+| [THOXOS.md](./docs/THOXOS.md) | Vision for ThoxOS Mini, Air, Edge, and Custom product line         |
+| [ROADMAP.md](./docs/ROADMAP.md) | Current status and future plans                                    |
+| [BUILDING.md](./BUILDING.md) | How to build ThoxTainer and ThoxContainerization from source       |
+| [CHANGELOG.md](./CHANGELOG.md) | Notable changes in this fork                                       |
+
+Original Apple documentation (tutorial, how-to, command reference, etc.) is still present in `docs/` and remains useful, with the main difference being that the command is now `thox` instead of `container`.
+
 ## Contributing to ThoxTainer
 
 ThoxTainer is developed as part of the Thox.ai / NeuralQuantum.ai ecosystem. 

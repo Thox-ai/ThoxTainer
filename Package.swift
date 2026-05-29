@@ -86,10 +86,10 @@ let package = Package(
             name: "CLITests",
             dependencies: [
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
-                .product(name: "Containerization", package: "containerization"),
-                .product(name: "ContainerizationArchive", package: "containerization"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
-                .product(name: "ContainerizationOS", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
+                .product(name: "ContainerizationArchive", package: "ThoxContainerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
                 .product(name: "TOML", package: "swift-toml"),
                 "ContainerBuild",
                 "ContainerLog",
@@ -106,9 +106,9 @@ let package = Package(
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "SwiftProtobuf", package: "swift-protobuf"),
                 .product(name: "TOML", package: "swift-toml"),
-                .product(name: "Containerization", package: "containerization"),
-                .product(name: "ContainerizationOCI", package: "containerization"),
-                .product(name: "ContainerizationOS", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOCI", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
                 "ContainerBuild",
                 "ContainerAPIClient",
                 "ContainerLog",
@@ -131,9 +131,9 @@ let package = Package(
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "NIO", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio"),
-                .product(name: "Containerization", package: "containerization"),
-                .product(name: "ContainerizationArchive", package: "containerization"),
-                .product(name: "ContainerizationOCI", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
+                .product(name: "ContainerizationArchive", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOCI", package: "ThoxContainerization"),
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "GRPCCore", package: "grpc-swift-2"),
                 .product(name: "GRPCNIOTransportHTTP2", package: "grpc-swift-nio-transport"),
@@ -159,10 +159,10 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
-                .product(name: "Containerization", package: "containerization"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
-                .product(name: "ContainerizationOS", package: "containerization"),
-                .product(name: "ContainerizationEXT4", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
+                .product(name: "ContainerizationEXT4", package: "ThoxContainerization"),
                 .product(name: "GRPCCore", package: "grpc-swift-2"),
                 .product(name: "GRPCNIOTransportHTTP2", package: "grpc-swift-nio-transport"),
                 .product(name: "GRPCProtobuf", package: "grpc-swift-protobuf"),
@@ -185,10 +185,10 @@ let package = Package(
         .target(
             name: "ContainerAPIService",
             dependencies: [
-                .product(name: "Containerization", package: "containerization"),
-                .product(name: "ContainerizationArchive", package: "containerization"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
-                .product(name: "ContainerizationOS", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
+                .product(name: "ContainerizationArchive", package: "ThoxContainerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "SystemPackage", package: "swift-system"),
                 "CVersion",
@@ -207,7 +207,7 @@ let package = Package(
         .testTarget(
             name: "ContainerAPIServiceTests",
             dependencies: [
-                .product(name: "Containerization", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
                 "ContainerResource",
                 "ContainerRuntimeLinuxClient",
                 "ContainerRuntimeClient",
@@ -217,10 +217,10 @@ let package = Package(
             name: "ContainerAPIClient",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
-                .product(name: "Containerization", package: "containerization"),
-                .product(name: "ContainerizationArchive", package: "containerization"),
-                .product(name: "ContainerizationOCI", package: "containerization"),
-                .product(name: "ContainerizationOS", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
+                .product(name: "ContainerizationArchive", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOCI", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio"),
@@ -238,7 +238,7 @@ let package = Package(
         .testTarget(
             name: "ContainerAPIClientTests",
             dependencies: [
-                .product(name: "Containerization", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
                 .product(name: "SystemPackage", package: "swift-system"),
                 "ContainerAPIClient",
                 "ContainerPersistence",
@@ -250,7 +250,7 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "Containerization", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
                 .product(name: "SystemPackage", package: "swift-system"),
                 "ContainerImagesService",
                 "ContainerLog",
@@ -266,11 +266,11 @@ let package = Package(
             name: "ContainerImagesService",
             dependencies: [
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "Containerization", package: "containerization"),
-                .product(name: "ContainerizationArchive", package: "containerization"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
-                .product(name: "ContainerizationOCI", package: "containerization"),
-                .product(name: "ContainerizationOS", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
+                .product(name: "ContainerizationArchive", package: "ThoxContainerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOCI", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
                 "ContainerAPIClient",
                 "ContainerImagesServiceClient",
                 "ContainerLog",
@@ -285,7 +285,7 @@ let package = Package(
             name: "ContainerImagesServiceClient",
             dependencies: [
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "Containerization", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
                 "ContainerXPC",
                 "ContainerLog",
             ],
@@ -296,8 +296,8 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
-                .product(name: "ContainerizationOS", package: "containerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
                 "ContainerLog",
                 "ContainerNetworkClient",
                 "ContainerNetworkServer",
@@ -314,7 +314,7 @@ let package = Package(
         .target(
             name: "ContainerNetworkClient",
             dependencies: [
-                .product(name: "ContainerizationExtras", package: "containerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
                 "ContainerResource",
                 "ContainerXPC",
             ],
@@ -324,7 +324,7 @@ let package = Package(
             name: "ContainerNetworkServer",
             dependencies: [
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
                 "ContainerNetworkClient",
                 "ContainerResource",
                 "ContainerXPC",
@@ -334,7 +334,7 @@ let package = Package(
         .testTarget(
             name: "ContainerNetworkServerTests",
             dependencies: [
-                .product(name: "ContainerizationExtras", package: "containerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
                 "ContainerNetworkServer",
             ]
         ),
@@ -342,7 +342,7 @@ let package = Package(
             name: "ContainerNetworkVmnetServer",
             dependencies: [
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
                 "ContainerNetworkServer",
                 "ContainerResource",
                 "ContainerXPC",
@@ -359,7 +359,7 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "Containerization", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
                 "ContainerLog",
                 "ContainerPlugin",
                 "ContainerResource",
@@ -376,9 +376,9 @@ let package = Package(
             name: "ContainerRuntimeLinuxServer",
             dependencies: [
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "Containerization", package: "containerization"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
-                .product(name: "ContainerizationOS", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 "ContainerAPIClient",
                 "ContainerNetworkClient",
@@ -405,7 +405,7 @@ let package = Package(
             name: "ContainerResource",
             dependencies: [
                 .product(name: "Collections", package: "swift-collections"),
-                .product(name: "Containerization", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
                 "ContainerXPC",
                 "CAuditToken",
                 "CVersion",
@@ -414,8 +414,8 @@ let package = Package(
         .testTarget(
             name: "ContainerResourceTests",
             dependencies: [
-                .product(name: "Containerization", package: "containerization"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
                 "ContainerAPIService",
                 "ContainerResource",
             ]
@@ -431,7 +431,7 @@ let package = Package(
             name: "ContainerPersistence",
             dependencies: [
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "Containerization", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
                 .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "ConfigurationTOML", package: "swift-configuration-toml"),
                 .product(name: "SystemPackage", package: "swift-system"),
@@ -443,7 +443,7 @@ let package = Package(
             name: "ContainerPersistenceTests",
             dependencies: [
                 .product(name: "Configuration", package: "swift-configuration"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "SystemPackage", package: "swift-system"),
                 "ContainerPersistence",
@@ -454,7 +454,7 @@ let package = Package(
             name: "ContainerPlugin",
             dependencies: [
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "ContainerizationOS", package: "containerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
                 .product(name: "SystemPackage", package: "swift-system"),
                 .product(name: "TOML", package: "swift-toml"),
                 "ContainerVersion",
@@ -469,7 +469,7 @@ let package = Package(
         .target(
             name: "ContainerXPC",
             dependencies: [
-                .product(name: "ContainerizationExtras", package: "containerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
                 .product(name: "Logging", package: "swift-log"),
                 "CAuditToken",
             ]
@@ -477,8 +477,8 @@ let package = Package(
         .target(
             name: "ContainerOS",
             dependencies: [
-                .product(name: "Containerization", package: "containerization"),
-                .product(name: "ContainerizationOS", package: "containerization"),
+                .product(name: "Containerization", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
             ],
             path: "Sources/ContainerOS"
         ),
@@ -491,7 +491,7 @@ let package = Package(
         .target(
             name: "TerminalProgress",
             dependencies: [
-                .product(name: "ContainerizationOS", package: "containerization")
+                .product(name: "ContainerizationOS", package: "ThoxContainerization")
             ]
         ),
         .testTarget(
@@ -504,8 +504,8 @@ let package = Package(
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio"),
                 .product(name: "Logging", package: "swift-log"),
-                .product(name: "ContainerizationExtras", package: "containerization"),
-                .product(name: "ContainerizationOS", package: "containerization"),
+                .product(name: "ContainerizationExtras", package: "ThoxContainerization"),
+                .product(name: "ContainerizationOS", package: "ThoxContainerization"),
             ]
         ),
         .testTarget(
@@ -546,7 +546,7 @@ let package = Package(
             dependencies: [],
             publicHeadersPath: "include",
             cSettings: [
-                .define("CZ_VERSION", to: "\"\(scVersion)\""),
+                .define("CZ_VERSION", to: "\"\(containerizationVersion)\""),
                 .define("GIT_COMMIT", to: "\"\(gitCommit)\""),
                 .define("RELEASE_VERSION", to: "\"\(releaseVersion)\""),
                 .define("BUILDER_SHIM_VERSION", to: "\"\(builderShimVersion)\""),
