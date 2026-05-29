@@ -23,7 +23,18 @@ ThoxTainer + ThoxContainerization enables the ThoxOS line of embedded Linux syst
 
 We customize the Linux kernel (see `ThoxContainerization/kernel/`), vminitd, and VM runtime specifically for these workloads while preserving OCI compatibility and the excellent fast-boot lightweight VM model from Apple.
 
-See [docs/THOXOS.md](./docs/THOXOS.md) (to be created) for the roadmap.
+See [docs/THOXOS.md](./docs/THOXOS.md) for the full vision.
+
+**Next Step**: If you want to start packaging real ThoxOS family projects as images right now, read the new practical guide:
+
+→ **[docs/QUICKSTART-THOXOS-FAMILY.md](./docs/QUICKSTART-THOXOS-FAMILY.md)**
+
+It covers workflows for:
+- thoxos-mini-mobile
+- thoxos-companion
+- thoxos-mini-portable
+- thox-agentic-os (ThoxAOS)
+- thoxos-desktop
 
 ## Get started
 
@@ -79,6 +90,7 @@ See the kernel customization guide in `ThoxContainerization/kernel/README.md`.
 | [GETTING_STARTED.md](./docs/GETTING_STARTED.md) | Step-by-step guide from zero to first custom kernel                |
 | [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | Deep technical overview of the VM model + ThoxOS layers           |
 | [KERNEL_GUIDE.md](./docs/KERNEL_GUIDE.md) | **Most important** — how to create ThoxOS Mini / Air / Custom kernels |
+| [QUICKSTART-THOXOS-FAMILY.md](./docs/QUICKSTART-THOXOS-FAMILY.md) | **Next step** — Use ThoxTainer to build images for thoxos-mini-mobile, thoxos-companion, thoxos-mini-portable, thox-agentic-os, and thoxos-desktop |
 | [THOXOS.md](./docs/THOXOS.md) | Vision for ThoxOS Mini, Air, Edge, and Custom product line         |
 | [ROADMAP.md](./docs/ROADMAP.md) | Current status and future plans                                    |
 | [BUILDING.md](./BUILDING.md) | How to build ThoxTainer and ThoxContainerization from source       |
