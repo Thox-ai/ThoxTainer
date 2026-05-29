@@ -85,6 +85,18 @@ public struct Application: AsyncLoggableCommand {
                 ]
             ),
             CommandGroup(
+                name: "OS",
+                subcommands: [
+                    OSCommand.self
+                ]
+            ),
+            CommandGroup(
+                name: "Kernel",
+                subcommands: [
+                    KernelCommand.self
+                ]
+            ),
+            CommandGroup(
                 name: "Other",
                 subcommands: Self.otherCommands()
             ),
