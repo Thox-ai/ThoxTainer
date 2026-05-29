@@ -1126,7 +1126,7 @@ Backward-compatible with previous CLI-only output. Top-level fields describe the
   "version": "1.2.3",
   "buildType": "debug",
   "commit": "abcdef1",
-  "appName": "container CLI",
+  "appName": "ThoxTainer CLI",
   "server": {
     "version": "container-apiserver 1.2.3",
     "buildType": "release",

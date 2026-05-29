@@ -1,5 +1,6 @@
 #!/bin/bash
 # Copyright © 2026 Apple Inc. and the container project authors.
+# Updated for ThoxTainer (thox CLI) fork by Thox.ai
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,6 +13,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# ThoxTainer update script (forked from update-container.sh)
+# Primary command: thox
+# Fallback for transition: container
 
 set -uo pipefail
 
@@ -37,9 +42,17 @@ UNSIGNED_FALLBACK_PKG=
 
 check_installed_version() {
     local target_version="$1"
-    if command -v container &>/dev/null; then
+    # Prefer thox (ThoxTainer), fallback to container during transition
+    if command -v thox &>/dev/null; then
         local installed_version
-        installed_version=$(container --version | awk '{print $4}')
+        installed_version=$(thox --version 2>/dev/null | awk '{print $4}')
+        installed_version=${installed_version%\)}
+        if [[ "$installed_version" == "$target_version" ]]; then
+            return 0
+        fi
+    elif command -v container &>/dev/null; then
+        local installed_version
+        installed_version=$(container --version 2>/dev/null | awk '{print $4}')
         installed_version=${installed_version%\)}
         if [[ "$installed_version" == "$target_version" ]]; then
             return 0

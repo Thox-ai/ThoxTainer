@@ -23,10 +23,13 @@ import PackageDescription
 let releaseVersion = ProcessInfo.processInfo.environment["RELEASE_VERSION"] ?? "0.0.0"
 let gitCommit = ProcessInfo.processInfo.environment["GIT_COMMIT"] ?? "unspecified"
 let builderShimVersion = "0.12.0"
-let scVersion = "0.33.2"
+
+// ThoxTainer fork: using local ThoxContainerization for development and customization
+// (originally from apple/containerization at tag matching this version pin)
+let containerizationVersion = "0.33.2"
 
 let package = Package(
-    name: "container",
+    name: "ThoxTainer",
     platforms: [.macOS("15")],
     products: [
         .library(name: "ContainerCommands", targets: ["ContainerCommands"]),
@@ -51,7 +54,8 @@ let package = Package(
         .library(name: "TerminalProgress", targets: ["TerminalProgress"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/containerization.git", exact: Version(stringLiteral: scVersion)),
+        // Local fork for ThoxOS kernel/VM customization. Change to remote git URL once ThoxContainerization is published.
+        .package(path: "../ThoxContainerization"),
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.3.0"),
         .package(url: "https://github.com/apple/swift-collections.git", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-configuration", from: "1.0.0"),
@@ -70,7 +74,7 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "container",
+            name: "thox",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 "ContainerAPIClient",

@@ -1,4 +1,6 @@
 # Copyright © 2025-2026 Apple Inc. and the container project authors.
+# Forked as ThoxTainer by Thox.ai / NeuralQuantum.ai — see NOTICE.md and README.md
+# Binary renamed from 'container' to 'thox' for the ThoxOS ecosystem.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,7 +51,7 @@ SUDO ?= sudo
 include Protobuf.Makefile
 
 .PHONY: all
-all: container
+all: thoxtainer
 all: init-block
 
 .PHONY: build
@@ -60,17 +62,22 @@ build:
 
 .PHONY: cli
 cli:
-	@echo Building container CLI...
+	@echo Building ThoxTainer (thox) CLI...
 	@$(SWIFT) --version
-	@$(SWIFT) build -c $(BUILD_CONFIGURATION) $(SWIFT_CONFIGURATION) --product container
-	@echo Installing container CLI to bin/...
+	@$(SWIFT) build -c $(BUILD_CONFIGURATION) $(SWIFT_CONFIGURATION) --product thox
+	@echo Installing thox CLI to bin/...
 	@mkdir -p bin
-	@install "$(BUILD_BIN_DIR)/container" "bin/container"
+	@install "$(BUILD_BIN_DIR)/thox" "bin/thox"
+	@ln -sf thox bin/container || true   # temporary compat symlink during fork transition
 
-.PHONY: container
-# Install binaries under project directory
-container: build
+.PHONY: thoxtainer
+# Install binaries under project directory (ThoxTainer)
+thoxtainer: build
 	@"$(MAKE)" BUILD_CONFIGURATION=$(BUILD_CONFIGURATION) DEST_DIR="$(ROOT_DIR)/" SUDO= install
+
+# Back-compat alias
+.PHONY: container
+container: thoxtainer
 
 .PHONY: release
 release: BUILD_CONFIGURATION = release
@@ -94,7 +101,7 @@ install: installer-pkg
 	fi
 
 $(STAGING_DIR):
-	@echo Installing container binaries from "$(BUILD_BIN_DIR)" into "$(STAGING_DIR)"...
+	@echo Installing ThoxTainer / thox binaries from "$(BUILD_BIN_DIR)" into "$(STAGING_DIR)"...
 	@rm -rf "$(STAGING_DIR)"
 	@mkdir -p "$(join $(STAGING_DIR), bin)"
 	@mkdir -p "$(join $(STAGING_DIR), libexec/container/plugins/container-runtime-linux/bin)"

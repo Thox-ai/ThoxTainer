@@ -1,3 +1,10 @@
+**Thox.ai / NeuralQuantum.ai — ThoxTainer (fork of Apple container)**
+Copyright © 2026 Thox.ai and NeuralQuantum.ai LLC
+ThoxTainer is a fork of the Apple container project. Original Apple copyrights and licenses are preserved below for all vendored/derived code. New contributions (ThoxOS kernels, custom vminitd, ThoxOS build tooling, branding, and extensions) are Copyright © Thox.ai unless otherwise noted.
+Licensed under the Apache License, Version 2.0.
+
+---
+
 **Apple Inc. and the AsyncHTTPClient project authors ( async-http-client )**
 Copyright © 2018-2021 Apple Inc. and the AsyncHTTPClient project authors
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.

@@ -1,33 +1,55 @@
-# Building the project
+# Building ThoxTainer
 
-To build the `container` project, you need:
+**ThoxTainer** (fork of Apple's `container`) — the foundation for ThoxOS Mini, ThoxOS Air, and custom embedded Linux VMs on Apple silicon.
 
-- Mac with Apple silicon
-- macOS 15 minimum, macOS 26 recommended
+To build the ThoxTainer project, you need:
+
+- Mac with Apple silicon (M1+)
+- macOS 15 minimum, macOS 26 recommended (for full Virtualization.framework features)
 - Xcode 26, set as the [active developer directory](https://developer.apple.com/library/archive/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-HOW_DO_I_SELECT_THE_DEFAULT_VERSION_OF_XCODE_TO_USE_FOR_MY_COMMAND_LINE_TOOLS_)
 
 > [!IMPORTANT]
-> There is a bug in the `vmnet` framework on macOS 26 that causes network creation to fail if the `container` helper applications are located under your `Documents` or `Desktop` directories. If you use `make install`, you can simply run the `container` binary in `/usr/local`. If you prefer to use the binaries that `make all` creates in your project `bin` and `libexec` directories, locate your project elsewhere, such as `~/projects/container`, until this issue is resolved.
+> There is a known `vmnet` framework issue on macOS 26 that can affect network creation if helper apps are under Documents/Desktop. For development, keep the project outside those folders (e.g. `/Volumes/VibeStore/ThoxTainer` or `~/projects/ThoxTainer`).
+
+## Related: ThoxContainerization
+
+This repo depends on the sibling [ThoxContainerization](../ThoxContainerization) (fork of apple/containerization). Build it first if making kernel changes:
+
+```bash
+cd ../ThoxContainerization
+make cross-prep   # if needed for Swift static Linux SDK
+make all
+```
 
 ## Compile and test
 
-Build `container` and the background services from source, and run basic and integration tests in an isolated application data directory:
+Build **thox** (the ThoxTainer CLI) and background services:
 
 ```bash
 rm -rf test-data
 make APP_ROOT=test-data all test integration
 ```
 
-Copy the binaries to `/usr/local/bin` and `/usr/local/libexec` (requires entering an administrator password):
+The resulting binary will be at `.build/<config>/thox` (or `bin/thox` after some make targets).
+
+To install system-wide (adapting original paths):
 
 ```bash
 make install
 ```
 
-Or to install a release build, with better performance than the debug build:
+Then run with:
+
+```bash
+thox --help
+thox system start   # (service plumbing still in progress for full fork)
+```
+
+For release-optimized build:
 
 ```bash
 BUILD_CONFIGURATION=release make all test integration
+```
 BUILD_CONFIGURATION=release make install
 ```
 
@@ -47,7 +69,7 @@ To make changes to `container` that require changes to the Containerization proj
 of the `container` repository. Ensure that you [follow containerization instructions](https://github.com/apple/containerization/blob/main/README.md#prepare-to-build-package)
 to prepare your build environment.
 
-2. In your development shell, go to the `container` project directory.
+2. In your development shell, go to the ThoxTainer project directory.
 
     ```bash
     cd container

@@ -31,7 +31,7 @@ import TerminalProgress
 // `log` is updated only once in the `validate()` method.
 private nonisolated(unsafe) var bootstrapLogger = {
     LoggingSystem.bootstrap({ _ in StderrLogHandler() })
-    var log = Logger(label: "com.apple.container")
+    var log = Logger(label: "ai.thox.thoxtainer")
     log.logLevel = .info
     return log
 }()
@@ -43,9 +43,9 @@ public struct Application: AsyncLoggableCommand {
     public init() {}
 
     public static let configuration = CommandConfiguration(
-        commandName: "container",
-        abstract: "A container platform for macOS",
-        version: ReleaseVersion.singleLine(appName: "container CLI"),
+        commandName: "thox",
+        abstract: "ThoxTainer - Linux containers and VMs for ThoxOS on Apple silicon",
+        version: ReleaseVersion.singleLine(appName: "ThoxTainer CLI"),
         subcommands: [
             DefaultCommand.self,
             HelpCommand.self,

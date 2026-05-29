@@ -1,92 +1,84 @@
 <h1>
-  <img alt="Containerization logo" src="./assets/Containerization-Logo.png" width="70" valign="middle">
-  &nbsp;container
+  <img alt="ThoxTainer logo" src="./assets/Containerization-Logo.png" width="70" valign="middle">
+  &nbsp;ThoxTainer
 </h1>
 
-`container` is a tool that you can use to create and run Linux containers as lightweight virtual machines on your Mac. It's written in Swift, and optimized for Apple silicon.
+> **Fork Notice**: ThoxTainer is a fork of [Apple's `container`](https://github.com/apple/container) project, originally created for running Linux containers as lightweight VMs on Apple silicon Macs. We have renamed and extended it under the Thox.ai ecosystem to power **ThoxOS** — a family of minimal, secure, embedded Linux distributions (ThoxOS Mini, ThoxOS Air, and more) purpose-built for AI edge devices, robotics, and sovereign compute.
 
-The tool consumes and produces [OCI-compatible container images](https://github.com/opencontainers/image-spec), so you can pull and run images from any standard container registry. You can push images that you build to those registries as well, and run the images in any other OCI-compatible application.
+**ThoxTainer** is a tool for creating and running Linux containers as lightweight virtual machines on your Mac. It's written in Swift, and optimized for Apple silicon. It forms the foundation for building, packaging, and running ThoxOS kernels and minimal VMs with strong isolation.
 
-`container` uses the [Containerization](https://github.com/apple/containerization) Swift package for low-level container, image, and process management.
+The tool consumes and produces [OCI-compatible container images](https://github.com/opencontainers/image-spec), so you can pull and run images from any standard container registry. You can push images that you build to those registries as well.
+
+ThoxTainer uses the [ThoxContainerization](../ThoxContainerization) (forked from Apple's Containerization) Swift package for low-level container, image, kernel, and process management.
 
 ![introductory movie showing some basic commands](./docs/assets/landing-movie.gif)
+
+## ThoxOS Vision
+
+ThoxTainer + ThoxContainerization enables the ThoxOS line of embedded Linux systems:
+
+- **ThoxOS Mini** — Ultra-minimal kernel + init for secure AI inference edges
+- **ThoxOS Air** — Lightweight air-gapped / offline-first variant
+- **ThoxOS Custom** — Tailored kernels for robotics, medical, defense, and industrial use cases
+
+We customize the Linux kernel (see `ThoxContainerization/kernel/`), vminitd, and VM runtime specifically for these workloads while preserving OCI compatibility and the excellent fast-boot lightweight VM model from Apple.
+
+See [docs/THOXOS.md](./docs/THOXOS.md) (to be created) for the roadmap.
 
 ## Get started
 
 ### Requirements
 
-You need a Mac with Apple silicon to run `container`. To build it, see the [BUILDING](./BUILDING.md) document.
+You need a Mac with Apple silicon (M-series) and macOS 26+ to run **thox**. To build from source, see the [BUILDING](./BUILDING.md) document.
 
-`container` is supported on macOS 26, since it takes advantage of new features and enhancements to virtualization and networking in this release. We do not support older versions of macOS and the `container` maintainers typically will not address issues that cannot be reproduced on macOS 26.
+ThoxTainer is currently in active development as a fork. Pre-built signed installers for ThoxTainer will be provided via Thox.ai releases (not Apple' s). For now, build from source.
 
-### Initial install
-
-Download the latest signed installer package for `container` from the [GitHub release page](https://github.com/apple/container/releases).
-
-To install the tool, double-click the package file and follow the instructions. Enter your administrator password when prompted, to give the installer permission to place the installed files under `/usr/local`.
-
-Start the system service with:
+### Quick Start (from source)
 
 ```bash
-container system start
+# In this repo
+make all
+# Then run directly or install
+./.build/release/thox --help
 ```
 
-### Upgrade or downgrade
-
-For both upgrading and downgrading, you can manually download and install the signed installer package by following the steps from [initial install](#initial-install) or use the `update-container.sh` script (installed to `/usr/local/bin`).
-
-If you're upgrading or downgrading, you must stop your existing `container`:
+Start the system service (note: service/launchd names still reference container during early fork porting):
 
 ```bash
-container system stop
+thox system start
 ```
 
-To upgrade to the latest release, simply run the command below:
+> **Note on installation**: The original `container system start` / install scripts and launchd plists use `com.apple.container` identifiers. We are adapting these for `ai.thox.thoxtainer` in subsequent work. See `scripts/` and `Sources/ContainerPlugin/`.
+
+### Development & Custom Kernels
+
+For ThoxOS kernel development:
 
 ```bash
-/usr/local/bin/update-container.sh
+cd ../ThoxContainerization
+make fetch-default-kernel   # or build custom ThoxOS kernels
+make all
 ```
 
-To downgrade, you must uninstall your existing `container` (the `-k` flag keeps your user data, while `-d` removes it):
-
-```bash
-/usr/local/bin/uninstall-container.sh -k
-/usr/local/bin/update-container.sh -v 0.3.0
-```
-
-Start the system service with:
-
-```bash
-container system start
-```
-
-### Uninstall
-
-Use the `uninstall-container.sh` script (installed to `/usr/local/bin`) to remove `container` from your system. To remove your user data along with the tool, run:
-
-```bash
-/usr/local/bin/uninstall-container.sh -d
-```
-
-To retain your user data so that it is available should you reinstall later, run:
-
-```bash
-/usr/local/bin/uninstall-container.sh -k
-```
+See the kernel customization guide in `ThoxContainerization/kernel/README.md`.
 
 ## Next steps
 
-- Take [a guided tour of `container`](./docs/tutorial.md) by building, running, and publishing a simple web server image.
-- Learn how to [use various `container` features](./docs/how-to.md).
-- Read a brief description and [technical overview](./docs/technical-overview.md) of `container`.
-- Browse the [full command reference](./docs/command-reference.md).
-- [Build and run](./BUILDING.md) `container` on your own development system.
-- View the project [API documentation](https://apple.github.io/container/documentation/).
+- Take [a guided tour](./docs/tutorial.md) (adapted from original) by building, running, and publishing a simple web server image with `thox`.
+- Learn how to [use various ThoxTainer features](./docs/how-to.md).
+- Read the [technical overview](./docs/technical-overview.md) (original design preserved).
+- Browse the [full command reference](./docs/command-reference.md) (commands now under `thox`).
+- [Build from source](./BUILDING.md).
+- Explore ThoxOS kernel work in the sibling [ThoxContainerization](../ThoxContainerization) repo.
 
-## Contributing
+## Contributing to ThoxTainer
 
-Contributions to `container` are welcome and encouraged. Please see our [main contributing guide](https://github.com/apple/containerization/blob/main/CONTRIBUTING.md) for more information.
+ThoxTainer is developed as part of the Thox.ai / NeuralQuantum.ai ecosystem. 
+
+- For ThoxOS-specific features (new kernels, vminitd extensions, ThoxOS Mini/Air build pipelines), contribute here or in ThoxContainerization.
+- Upstream improvements that benefit the original model should be contributed back to https://github.com/apple/container where appropriate.
+- See [CONTRIBUTING.md](./CONTRIBUTING.md) and the original guide in the Containerization fork.
 
 ## Project Status
 
-The container project is currently under active development. Its stability, both for consuming the project as a Swift package and the `container` tool, is only guaranteed within patch versions, such as between 0.1.1 and 0.1.2. Minor version releases may include breaking changes until we reach a 1.0.0 release.
+This is an early-stage fork. We are preserving the excellent per-container lightweight VM architecture from Apple while adding ThoxOS-specific kernel profiles, embedded tooling, and AI/edge optimizations. Stability guarantees follow the upstream until we stabilize our 1.0 line.
