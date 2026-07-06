@@ -1,6 +1,6 @@
 **Thox.ai / NeuralQuantum.ai — ThoxTainer (fork of Apple container)**
-Copyright © 2026 Thox.ai and NeuralQuantum.ai LLC
-ThoxTainer is a fork of the Apple container project. Original Apple copyrights and licenses are preserved below for all vendored/derived code. New contributions (ThoxOS kernels, custom vminitd, ThoxOS build tooling, branding, and extensions) are Copyright © Thox.ai unless otherwise noted.
+Copyright (c) 2026 Thox.ai LLC. All rights reserved.
+ThoxTainer is a fork of the Apple container project. Original Apple copyrights and licenses are preserved below for all vendored/derived code. New contributions (ThoxOS kernels, custom vminitd, ThoxOS build tooling, branding, and extensions) are Copyright (c) Thox.ai LLC unless otherwise noted.
 Licensed under the Apache License, Version 2.0.
 
 ---

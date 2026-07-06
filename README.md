@@ -1,3 +1,11 @@
+<!-- thox-badges -->
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square&labelColor=09090b)](LICENSE)
+[![THOX.ai](https://img.shields.io/badge/THOX.ai-portfolio-0a0a0a?style=flat-square&labelColor=09090b)](https://thox.ai)
+[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square&labelColor=09090b)](https://github.com/Thox-ai/ThoxTainer)
+[![Release](https://img.shields.io/github/v/release/Thox-ai/ThoxTainer?style=flat-square&labelColor=09090b&logo=github)](https://github.com/Thox-ai/ThoxTainer/releases)
+[![Last Commit](https://img.shields.io/github/last-commit/Thox-ai/ThoxTainer?style=flat-square&labelColor=09090b)](https://github.com/Thox-ai/ThoxTainer/commits/main)
+[![Issues](https://img.shields.io/github/issues/Thox-ai/ThoxTainer?style=flat-square&labelColor=09090b)](https://github.com/Thox-ai/ThoxTainer/issues)
+<!-- /thox-badges -->
 <h1>
   <img alt="ThoxTainer logo" src="./assets/Containerization-Logo.png" width="70" valign="middle">
   &nbsp;ThoxTainer
@@ -109,3 +117,22 @@ ThoxTainer is developed as part of the Thox.ai / NeuralQuantum.ai ecosystem.
 ## Project Status
 
 This is an early-stage fork. We are preserving the excellent per-container lightweight VM architecture from Apple while adding ThoxOS-specific kernel profiles, embedded tooling, and AI/edge optimizations. Stability guarantees follow the upstream until we stabilize our 1.0 line.
+
+## Fork Notice and Legal
+
+ThoxTainer is a fork of Apple's `container` project, extended by Thox.ai LLC to
+power ThoxOS (ThoxOS Mini, ThoxOS Air, and custom embedded Linux distributions).
+Apple's original Apache 2.0 license and copyrights are preserved in
+[LICENSE](LICENSE) and [NOTICE.md](NOTICE.md).
+
+THOX-specific contributions (ThoxOS kernels, custom vminitd, ThoxOS build
+tooling, branding, and extensions) are:
+
+Copyright (c) 2026 Thox.ai LLC. All rights reserved.
+
+Thox.ai LLC is an independent Texas limited liability company.
+
+- **Tommy Xaypanya** - Chief Technology Officer (CTO)
+- **Craig Ross** - Chief Executive Officer (CEO)
+
+Licensed under the [Apache License, Version 2.0](LICENSE).
